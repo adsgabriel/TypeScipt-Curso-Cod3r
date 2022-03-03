@@ -107,3 +107,114 @@ function tuplaParam2(...params: [number, string, boolean]) {
 }
 
 tuplaParam2(...tupla)
+
+//Destructuring (array)
+
+const caracteristicas = ['Motor Zetec 1.8', 2020]
+//const motor = caracteristica[0]
+//const ano = caracteristica[1]
+
+const [motor, ano] = caracteristicas;
+console.log(motor);
+console.log(ano);
+
+//Destructuring (objeto)
+
+const item = {
+    nome: 'SSD 480GB',
+    preco: 200,
+    caracteristicas: {
+        w: 'Importado'
+    }
+}
+
+const nomeItem = item.nome;
+const precoItem = item.preco;
+console.log(nomeItem);
+console.log(precoItem);
+
+const { nome: n, preco: p, caracteristicas: { w } } = item
+
+console.log(n, p, w)
+
+
+//Template String
+
+const usuarioID: string = 'Suporte';
+const notificacoes: string = '19'
+/* const boasVindas = 'Boas vindas' + usuarioID + 'Notificações: ' + notificacoes */
+
+const boasVindas = `
+Boas Vindas ${usuarioID}, 
+Notificações: ${parseInt(notificacoes) > 9 ? '+9' : notificacoes}
+`;
+
+console.log(boasVindas)
+console.log(`${(1 + 1) * 30}`)
+console.log(`Motor: ${caracteristicas}`)
+
+//Desafio 
+
+//1)
+const dobro = (valor: number):number => valor * 2;
+console.log(dobro(20));
+
+//2)
+const dizerOla = function(nome: string = 'Pessoa'): void {
+    console.log("Ola, " + nome)
+}
+dizerOla();
+dizerOla("Ana Luiza")
+
+//3)
+const nums = [-3, 33, 38, 5]
+console.log(Math.min(...nums));
+
+//4)
+    
+const array = [55, 20]
+array.push(...nums)
+console.log(array)
+
+//5)
+const notas = [8.5, 6.3, 9.4]
+const [notas1, notas2, notas3] = notas
+console.log(notas1, notas2, notas3)
+
+ //6)
+const cientista = {primeiroNome: "Will", experiencia: 12}
+const {primeiroNome, experiencia} = cientista
+console.log(primeiroNome, experiencia)
+
+
+//Callback
+
+function espera3s( callback: (dado: string) => void){
+    setTimeout(() =>{
+        callback('3s depois...')
+    },3000)
+}
+
+espera3s( function(resultado: string){
+    console.log(resultado)
+})
+
+
+function espera3sPromise() {
+    return new Promise ((resolve: any) => {
+        setTimeout(() =>{
+            resolve('3s depois promise...')
+        },3000)
+    })
+}
+
+espera3sPromise().then(dado => console.log(dado));
+
+
+fetch('https://swapi.dev/api/people/1')
+    .then(res => res.json())
+    .then(personagem => personagem.films)
+    .then(films => fetch(films[0]))
+    .then(resFilm => resFilm.json())
+    .then(filme => console.log(filme.title))
+    .catch(err => console.log('Catch!!!!' + err))
