@@ -153,5 +153,5 @@ let correntista = {
     contaBancaria: contaBancaria,
     contatos: ['32145685', '12454545']
 };
-correntista.contaBancaria.depositar(3000);
+correntista.contaBancaria.depositar(2000);
 console.log(correntista);
